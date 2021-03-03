@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+    <!-- 배열 입력 받기 -->
+    <div>
+        <h3>Array: </h3>
+    <input type="text" id="arrayText" placeholder="1,2,3,4,5,...">
+    </div>
+    
+    <!-- 검색할 숫자 입력 받기-->
+    <div>
+        <h3>Search: </h3>
+    <input type="text" id="searchText" placeholder="search what you want">
+    <!-- 검색 방법 선택 -->
+    <select data-sol>
+        <option value="linear">Linear Search</option>
+        <option value="binary">Binary Search</option>
+    </select>
+    <!-- 검색 버튼 -->
+    <input type="button" id="searchBtn" value="search">
+    </div>
+
+    <!-- 정렬할 숫자 입력 받기-->
+    <div>
+        <h3>Sort: </h3>
+    <input type="text" id="sortText" placeholder="sort what you want">
+    <!-- 정렬 방법 선택 -->
+    <select data-sol>
+        <option value="bubble">Bubble Sort</option>
+        <option value="selection">Selection Sort</option>
+        <option value="merge">Merge Sort</option>
+    </select>
+    <!-- 정렬 버튼 -->
+    <input type="button" id="sortBtn" value="sort">
+    </div>
+    
+    <!-- 검색 시간 출력 -->
+    <div>
+        <h3>Time: </h3>
+    </div>
+
+    <!-- 아웃풋  -->
+    <div>
+        <h3>Output: </h3>
+    </div>
+</body>
+</html>
