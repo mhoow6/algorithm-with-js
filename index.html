@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algorithm</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" type="module"></script>
 </head>
 <body>
     <!-- 배열 입력 받기 -->
     <div>
         <h3>Array: </h3>
     <input type="text" id="arrayText" placeholder="1,2,3,4,5,...">
+    <!-- 배열 버튼 -->
+    <input type="button" id="arrayBtn" value="send">
     </div>
     
     <!-- 검색할 숫자 입력 받기-->
@@ -20,9 +21,10 @@
         <h3>Search: </h3>
     <input type="text" id="searchText" placeholder="search what you want">
     <!-- 검색 방법 선택 -->
-    <select data-sol>
+    <select id="searchSelect">
         <option value="linear">Linear Search</option>
         <option value="binary">Binary Search</option>
+        <option value="binaryRe">Binary Search Recursive</option>
     </select>
     <!-- 검색 버튼 -->
     <input type="button" id="searchBtn" value="search">
@@ -31,9 +33,8 @@
     <!-- 정렬할 숫자 입력 받기-->
     <div>
         <h3>Sort: </h3>
-    <input type="text" id="sortText" placeholder="sort what you want">
     <!-- 정렬 방법 선택 -->
-    <select data-sol>
+    <select id="sortSelect">
         <option value="bubble">Bubble Sort</option>
         <option value="selection">Selection Sort</option>
         <option value="merge">Merge Sort</option>
@@ -41,15 +42,6 @@
     <!-- 정렬 버튼 -->
     <input type="button" id="sortBtn" value="sort">
     </div>
-    
-    <!-- 검색 시간 출력 -->
-    <div>
-        <h3>Time: </h3>
-    </div>
-
-    <!-- 아웃풋  -->
-    <div>
-        <h3>Output: </h3>
-    </div>
+    <script src="test.js"></script>
 </body>
 </html>
