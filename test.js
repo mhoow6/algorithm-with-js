@@ -9,8 +9,8 @@ const sortText = document.getElementById("sortText");
 const sortSelect = document.getElementById("sortSelect");
 const sortBtn = document.getElementById("sortBtn");
 
-let list;
-let searchValue;
+let array;
+let value;
 
 // import Algorithm from "./algorithm.js";
 class Algorithm {
@@ -26,11 +26,11 @@ class Algorithm {
   linearSearch(array, value) {
     let count = 1;
     for (var i = 0; i < array.length; i++) {
-      console.log("I found " + array[i] + "...");
       if (array[i] === value) {
         console.log("Finally!! (" + count + ")");
         return 0;
       } else {
+        console.log("I found " + array[i] + "...");
         count++;
       }
     }
@@ -81,31 +81,60 @@ class Algorithm {
     return this.binarySearchRecursive(array, value, count, mid + 1, high);
   }
 
-  bubbleSort(array, value) {}
+  bubbleSort(array) {
+    let temp;
+    let count = 0;
 
-  selectionSort(array, value) {}
+    for (var i = array.length - 1; i > 0; i--) {
+      for (var j = 0; j < i; j++) {
+        if (array[j] > array[j + 1]) {
+          temp = array[j];
+          array[j] = array[j + 1];
+          array[j + 1] = temp;
+        }
+        count++;
+        console.log("Sorting...(" + count + ") " + array);
+      }
+    }
+    console.log("done. " + array);
+  }
 
-  mergeSort(array, value) {}
+  selectionSort(array) {}
+
+  mergeSort(array) {}
 }
 
 arrayBtn.addEventListener("click", () => {
-  list = arrayText.value.split(",");
-  console.log(list);
+  array = arrayText.value.split(",");
+  console.log("You send me this array: " + array);
+  console.log("------------------------");
 });
 
 searchBtn.addEventListener("click", () => {
   algo = new Algorithm(searchSelect);
-  searchValue = searchText.value;
+  value = searchText.value;
 
   if (algo.selectedOption.value === "linear") {
-    algo.linearSearch(list, searchValue);
+    algo.linearSearch(array, value);
   } else if (algo.selectedOption.value === "binary") {
-    algo.binarySearch(list, searchValue);
+    algo.binarySearch(array, value);
   } else if (algo.selectedOption.value === "binaryRe") {
     let low = 0;
-    let high = list.length - 1;
+    let high = array.length - 1;
     let count = 1;
-    algo.binarySearchRecursive(list, searchValue, count, low, high);
+    algo.binarySearchRecursive(array, value, count, low, high);
+  }
+});
+
+sortBtn.addEventListener("click", () => {
+  algo = new Algorithm(sortSelect);
+
+  if (algo.selectedOption.value === "bubble") {
+    algo.bubbleSort(array);
+  } else if (algo.selectedOption.value === "selection") {
+    algo.selectionSort(array);
+  } else if (algo.selectedOption.value === "merge") {
+    algo.mergeSort(array);
   }
 });
 
