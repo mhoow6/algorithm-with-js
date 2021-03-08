@@ -45,7 +45,7 @@ class Algorithm {
       let mid = Math.floor((low + high) / 2);
 
       if (array[mid] === value) {
-        console.log("Finally!! (" + count + ")");
+        console.log("Finally!! I found " + array[mid] + "! (" + count + ")");
         return 0;
       }
 
@@ -66,7 +66,7 @@ class Algorithm {
     let mid = Math.floor((low + high) / 2);
 
     if (array[mid] === value) {
-      console.log("Finally!! (" + count + ")");
+      console.log("Finally!! I found " + array[mid] + "! (" + count + ")");
       return 0;
     }
 
@@ -81,10 +81,13 @@ class Algorithm {
     return this.binarySearchRecursive(array, value, count, mid + 1, high);
   }
 
+  // 비교횟수 n-1, n-2, … , 2, 1 = n(n-1)/2
+  // O(n^2)
   bubbleSort(array) {
     let temp;
     let count = 0;
 
+    // 마지막 숫자는 자동으로 정렬되기 때문에 (숫자 개수-1) 만큼 반복한다.
     for (var i = array.length - 1; i > 0; i--) {
       for (var j = 0; j < i; j++) {
         if (array[j] > array[j + 1]) {
@@ -96,17 +99,49 @@ class Algorithm {
         console.log("Sorting...(" + count + ") " + array);
       }
     }
-    console.log("done. " + array);
+    console.log("------------------------");
+    console.log("Bubble Sort Completed: ");
+    console.log(array);
+    console.log("------------------------");
   }
 
-  selectionSort(array) {}
+  // 비교횟수 n-1, n-2, … , 2, 1 = n(n-1)/2
+  // O(n^2)
+  selectionSort(array) {
+    let count = 0;
+    let temp = 0;
+    // 마지막 숫자는 자동으로 정렬되기 때문에 (숫자 개수-1) 만큼 반복한다.
+    for (var i = 0; i < array.length - 1; i++) {
+      let mini = i;
+
+      // 첫 번째 인덱스를 최소값으로 잡기 때문에 (i+1) 부터 반복한다.
+      for (var j = i + 1; j < array.length; j++) {
+        if (array[mini] > array[j]) {
+          mini = j;
+        }
+        count++;
+        console.log("Sorting...(" + count + ") " + array);
+      }
+
+      if (mini !== i) {
+        temp = array[i];
+        array[i] = array[mini];
+        array[mini] = temp;
+      }
+    }
+    console.log("------------------------");
+    console.log("Selection Sort Completed: ");
+    console.log(array);
+    console.log("------------------------");
+  }
 
   mergeSort(array) {}
 }
 
 arrayBtn.addEventListener("click", () => {
   array = arrayText.value.split(",");
-  console.log("You send me this array: " + array);
+  console.log("You send me this array: ");
+  console.log(array);
   console.log("------------------------");
 });
 
