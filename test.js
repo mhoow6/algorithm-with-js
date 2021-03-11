@@ -11,6 +11,7 @@ const sortBtn = document.getElementById("sortBtn");
 
 let array;
 let value;
+let cnt = 0;
 
 // import Algorithm from "./algorithm.js";
 class Algorithm {
@@ -135,7 +136,75 @@ class Algorithm {
     console.log("------------------------");
   }
 
-  mergeSort(array) {}
+  mergeSort(array, left, right) {
+    // 크기가 1보다 작은 경우는 정렬되었다고 보기 때문에, 큰 경우만 따진다
+    cnt++;
+
+    console.log(
+      "Current States\n" +
+        "left: " +
+        left +
+        "\nright: " +
+        right +
+        "\ncnt: " +
+        cnt
+    );
+
+    if (left < right) {
+      let middle = Math.floor((left + right) / 2);
+      console.log("Left MergeSort Start!!");
+      this.mergeSort(array, left, middle);
+      console.log("Right MergeSort Start!!");
+      this.mergeSort(array, middle + 1, right);
+      this.merge(array, left, middle, right);
+    }
+  }
+
+  merge(array, left, middle, right) {
+    let i, j, k;
+    let sorted;
+    i = left; // 왼쪽 배열의 첫 번째
+    j = middle + 1; // 오른쪽 배열의 첫 번째 (중앙에서 한 칸 뒤)
+    k = left; // 정렬된 배열에서 움직일 k도 i와 똑같이 움직임
+
+    console.log("MERGE(" + left + ")(" + right + ")");
+
+    // 왼쪽 배열과 오른쪽 배열 탐색이 끝날때까지 루프
+    while (i <= middle && j <= right) {
+      if (array[i] <= array[j]) {
+        // 왼쪽 배열이 더 작을 경우
+        sorted[k] = array[i]; // 정렬할 배열에 왼쪽 배열 값을 먼저 넣는다 (오름차순 기준)
+        i++; // 왼쪽 배열에서 다음 원소를 탐색해야 하므로 i값 증가
+      } else {
+        sorted[k] = array[j];
+        j++;
+      }
+      k++; // 정렬할 배열의 다음 인덱스에 값을 넣을 수 있도록 k값 증가
+    }
+
+    // 남은 데이터 삽입
+    if (i > middle) {
+      // 왼쪽 배열이 먼저 끝날 경우
+      for (var t = j; t <= right; t++) {
+        // 남은 오른쪽 배열을 끝까지
+        sorted[k] = array[t]; // 정렬된 배열에 넣어준다.
+        k++;
+      }
+    } else {
+      // 오른쪽 배열이 먼저 끝날 경우
+      for (var t = i; t <= middle; t++) {
+        // 남은 왼쪽 배열을 끝까지
+        sorted[k] = array[t]; // 정렬된 배열에 넣어준다.
+        k++;
+      }
+    }
+
+    // 정렬된 임시 배열을 실제 배열에 옮김
+    for (var t = left; t <= right; t++) {
+      // 모든 위치를 탐색하면서
+      array[t] = sorted[t];
+    }
+  }
 }
 
 arrayBtn.addEventListener("click", () => {
@@ -169,7 +238,7 @@ sortBtn.addEventListener("click", () => {
   } else if (algo.selectedOption.value === "selection") {
     algo.selectionSort(array);
   } else if (algo.selectedOption.value === "merge") {
-    algo.mergeSort(array);
+    algo.mergeSort(array, 0, array.length - 1);
   }
 });
 
