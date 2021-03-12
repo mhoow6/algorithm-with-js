@@ -136,38 +136,24 @@ class Algorithm {
     console.log("------------------------");
   }
 
-  mergeSort(array, left, right) {
-    // 크기가 1보다 작은 경우는 정렬되었다고 보기 때문에, 큰 경우만 따진다
-    cnt++;
-
-    console.log(
-      "Current States\n" +
-        "left: " +
-        left +
-        "\nright: " +
-        right +
-        "\ncnt: " +
-        cnt
-    );
-
-    if (left < right) {
-      let middle = Math.floor((left + right) / 2);
-      console.log("Left MergeSort Start!!");
-      this.mergeSort(array, left, middle);
-      console.log("Right MergeSort Start!!");
-      this.mergeSort(array, middle + 1, right);
-      this.merge(array, left, middle, right);
-    }
-  }
-
   merge(array, left, middle, right) {
     let i, j, k;
-    let sorted;
+    let sorted = new Array();
     i = left; // 왼쪽 배열의 첫 번째
     j = middle + 1; // 오른쪽 배열의 첫 번째 (중앙에서 한 칸 뒤)
     k = left; // 정렬된 배열에서 움직일 k도 i와 똑같이 움직임
 
-    console.log("MERGE(" + left + ")(" + right + ")");
+    console.log(
+      "Merging list...(" +
+        left +
+        "~" +
+        middle +
+        "," +
+        (middle + 1) +
+        "~" +
+        right +
+        ")"
+    );
 
     // 왼쪽 배열과 오른쪽 배열 탐색이 끝날때까지 루프
     while (i <= middle && j <= right) {
@@ -204,11 +190,33 @@ class Algorithm {
       // 모든 위치를 탐색하면서
       array[t] = sorted[t];
     }
+
+    console.log("Merge Completed:");
+    console.log(array);
+    console.log("------------------------");
+  }
+
+  mergeSort(array, left, right) {
+    console.log("Current States\n" + "left: " + left + "\nright: " + right);
+
+    // 크기가 1보다 작은 경우는 정렬되었다고 보기 때문에, 큰 경우만 따진다
+    if (left < right) {
+      console.log("Dividng list...");
+      let middle = Math.floor((left + right) / 2); // 중앙 위치를 계산하여 배열을 균등 분할시킴
+      this.mergeSort(array, left, middle); // 왼쪽 배열 정렬 (정복)
+      this.mergeSort(array, middle + 1, right); // 오른쪽 배열 정렬 (정복)
+      this.merge(array, left, middle, right); // 정렬된 배열을 합병
+    }
   }
 }
 
 arrayBtn.addEventListener("click", () => {
   array = arrayText.value.split(",");
+
+  array = array.map((item) => {
+    return parseInt(item, 10);
+  });
+
   console.log("You send me this array: ");
   console.log(array);
   console.log("------------------------");
@@ -216,7 +224,7 @@ arrayBtn.addEventListener("click", () => {
 
 searchBtn.addEventListener("click", () => {
   algo = new Algorithm(searchSelect);
-  value = searchText.value;
+  value = parseInt(searchText.value, 10);
 
   if (algo.selectedOption.value === "linear") {
     algo.linearSearch(array, value);
